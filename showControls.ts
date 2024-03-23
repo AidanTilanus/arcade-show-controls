@@ -9,7 +9,6 @@ enum Buttons {
     Menu
 }
 
-
 //% block="Show Controls"
 namespace showControls {
     export class ControlAction {
@@ -17,7 +16,7 @@ namespace showControls {
     }
     let controlsRenderable: scene.Renderable
     
-    //% block="set first controls $firstAction || and second controls $secondAction"
+    //% block="set first controls $firstActions || and second controls $secondActions"
     //% blockId="showControlsShowControls"
     //% firstAction.shadow="lists_create_with"
     //% firstAction.defl="showControlsCreateContolAction"
@@ -40,7 +39,8 @@ namespace showControls {
     let secondAction: ControlAction
 
     //looping
-    forever(function() {if (render) {
+    forever(function() {
+        if (render) {
             if (firstControlActions.length > 0) {
                         firstAction = firstControlActions[firstControlActionsIndex]
                         firstControlActionsIndex++
@@ -60,7 +60,6 @@ namespace showControls {
 
             pause(cycleTime)
         }
-            
     })
 
     //rendering
@@ -76,28 +75,34 @@ namespace showControls {
                     if (secondAction) { actions.push(secondAction) }
 
                     for (let action of actions) {
-                        if (action.button == Buttons.Arrows) {
-                            spriteutils.drawTransparentImage(arrows, screen, x, scene.screenHeight() - 11)
-                            x += arrows.width + 2
-                        }
-                        else if (action.button == Buttons.A) {
-                            spriteutils.drawTransparentImage(aButton, screen, x, scene.screenHeight() - 11)
-                            x += aButton.width + 2
-                        }
-                        else if (action.button == Buttons.B) {
-                            spriteutils.drawTransparentImage(bButton, screen, x, scene.screenHeight() - 11)
-                            x += bButton.width + 2
-                        }
-                        else if (action.button == Buttons.Menu) {
-                            spriteutils.drawTransparentImage(menuButton, screen, x, scene.screenHeight() - 11)
-                            x += menuButton.width + 2
-                        }
+                        if (action) {
+                            if (action.button == Buttons.Arrows) {
+                                spriteutils.drawTransparentImage(arrows, screen, x, scene.screenHeight() - 11)
+                                x += arrows.width + 2
+                            }
+                            else if (action.button == Buttons.A) {
+                                spriteutils.drawTransparentImage(aButton, screen, x, scene.screenHeight() - 11)
+                                x += aButton.width + 2
+                            }
+                            else if (action.button == Buttons.B) {
+                                spriteutils.drawTransparentImage(bButton, screen, x, scene.screenHeight() - 11)
+                                x += bButton.width + 2
+                            }
+                            else if (action.button == Buttons.Menu) {
+                                spriteutils.drawTransparentImage(menuButton, screen, x, scene.screenHeight() - 11)
+                                x += menuButton.width + 2
+                            }
 
-                        screen.print(action.action, x, scene.screenHeight() - 9, 15)
-                        x += action.action.length * 6 + 1
+                            screen.print(action.action, x, scene.screenHeight() - 9, 15)
+                            x += action.action.length * 6 + 1
+                        }
+                            
                     }
                 })
             }
+        }
+        else {
+            controlsRenderable.destroy()
         }
         
     }
@@ -123,6 +128,9 @@ namespace showControls {
     //% block="showing controls"
     //% blockId="showControlsGetEnabled"
     export function getEnabled(): boolean {
+        if (!render) {
+            controlsRenderable.destroy()
+        }
         return render
     }
 
