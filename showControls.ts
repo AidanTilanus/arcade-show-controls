@@ -19,9 +19,8 @@ namespace showControls {
     
     //% block="set first controls||$firstAction and second controls $secondAction"
     //% blockId="showControlsShowControls"
-    //% firstAction.shadow="showControlsCreateContolAction"
-    //% secondAction.shadow="showControlsCreateContolAction"
-    //% inlineInputMode=external
+    //% firstAction.shadow="lists_create_with"
+    //% secondAction.shadow="lists_create_with"
     export function showControls(firstActions: ControlAction[], secondActions?: ControlAction[]) {
         firstControlActions = firstActions
         if (secondActions) {
