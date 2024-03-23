@@ -17,12 +17,12 @@ namespace showControls {
     }
     let controlsRenderable: scene.Renderable
     
-    //% block="set first controls||$firstAction and second controls $secondAction"
+    //% block="set first controls $firstAction || and second controls $secondAction"
     //% blockId="showControlsShowControls"
     //% firstAction.shadow="lists_create_with"
-    //% myParam.defl="showControlsCreateContolAction"
+    //% firstAction.defl="showControlsCreateContolAction"
     //% secondAction.shadow="lists_create_with"
-    //% myParam.defl="showControlsCreateContolAction"
+    //% secondAction.defl="showControlsCreateContolAction"
     export function showControls(firstActions: ControlAction[], secondActions?: ControlAction[]) {
         firstControlActions = firstActions
         if (secondActions) {
